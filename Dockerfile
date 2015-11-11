@@ -8,13 +8,6 @@ MAINTAINER Alban Montaigu <alban.montaigu@gmail.com>
 RUN rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm \
   && yum -y install passwd sudo git wget ruby gcc gcc-c++ openssl
 
-# Create user
-RUN useradd hiroakis \
- && echo "hiroakis" | passwd hiroakis --stdin \
- && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config \
- && sed -ri 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config \
- && echo "hiroakis ALL=(ALL) ALL" >> /etc/sudoers.d/hiroakis
-
 # Redis
 RUN yum install -y redis
 
