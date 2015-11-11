@@ -6,7 +6,7 @@ MAINTAINER Alban Montaigu <alban.montaigu@gmail.com>
 
 # Basic packages
 RUN rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm \
-  && yum -y install passwd sudo git wget ruby gcc gcc-c++
+  && yum -y install passwd sudo git wget ruby gcc gcc-c++ openssl
 
 # Create user
 RUN useradd hiroakis \
