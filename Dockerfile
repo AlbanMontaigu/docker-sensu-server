@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND="noninteractive"
 # System preparation
 RUN apt-get update \
     && apt-get upgrade -y \
-    && apt-get install -y sudo git wget ruby gcc openssl supervisor redis-server \
+    && apt-get install -y sudo git wget ruby gcc openssl supervisor make redis-server \
     && mkdir -p /var/log/supervisor
 
 # RabbitMQ
