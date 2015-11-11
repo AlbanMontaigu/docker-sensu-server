@@ -11,8 +11,7 @@ ENV DEBIAN_FRONTEND="noninteractive"
 RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y sudo git wget ruby gcc openssl supervisor redis-server \
-    && mkdir -p /var/log/supervisor \
-    && rm -r /var/lib/apt/lists/*
+    && mkdir -p /var/log/supervisor
 
 # RabbitMQ
 RUN apt-get install -y rabbitmq-server \
@@ -31,8 +30,7 @@ RUN rabbitmq-plugins enable rabbitmq_management
 RUN wget -q http://repositories.sensuapp.org/apt/pubkey.gpg -O- | sudo apt-key add - \
     && echo "deb     http://repositories.sensuapp.org/apt sensu main" | sudo tee /etc/apt/sources.list.d/sensu.list \
     && apt-get update \
-    && apt-get install -y sensu \
-    && rm -r /var/lib/apt/lists/*
+    && apt-get install -y sensu
 ADD ./files/config.json /etc/sensu/
 ADD ./files/handler_mailer.json /etc/sensu/conf.d/handler_mailer.json
 RUN mkdir -p /etc/sensu/ssl \
@@ -44,7 +42,8 @@ RUN mkdir -p /etc/sensu/ssl \
     && wget -O /etc/sensu/conf.d/mailer.json https://raw.github.com/sensu/sensu-community-plugins/master/handlers/notification/mailer.json
 
 # uchiwa
-RUN apt-get install -y uchiwa
+RUN apt-get install -y uchiwa \
+    && rm -r /var/lib/apt/lists/*
 ADD ./files/uchiwa.json /etc/sensu/
 
 # supervisord
