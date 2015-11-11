@@ -1,10 +1,12 @@
+# Base image
 FROM centos:centos6
 
-MAINTAINER Hiroaki Sano <hiroaki.sano.9stories@gmail.com>
+# Maintainer
+MAINTAINER Alban Montaigu <alban.montaigu@gmail.com>
 
 # Basic packages
 RUN rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm \
-  && yum -y install passwd sudo git wget openssl openssh openssh-server openssh-clients
+  && yum -y install passwd sudo git wget
 
 # Create user
 RUN useradd hiroakis \
@@ -46,9 +48,7 @@ RUN wget http://peak.telecommunity.com/dist/ez_setup.py;python ez_setup.py \
   && easy_install supervisor
 ADD files/supervisord.conf /etc/supervisord.conf
 
-RUN /etc/init.d/sshd start && /etc/init.d/sshd stop
-
-EXPOSE 22 3000 4567 5671 15672
+EXPOSE 3000 4567 5671 15672
 
 CMD ["/usr/bin/supervisord"]
 
