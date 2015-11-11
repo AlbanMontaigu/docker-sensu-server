@@ -1,5 +1,5 @@
 # Base image
-FROM centos:centos6
+FROM centos:centos7
 
 # Maintainer
 MAINTAINER Alban Montaigu <alban.montaigu@gmail.com>
@@ -12,7 +12,7 @@ RUN rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.
 RUN yum install -y redis
 
 # RabbitMQ
-RUN yum update -y && yum install -y erlang 
+RUN yum install -y erlang 
 
 RUN rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc \
   && rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v3.1.4/rabbitmq-server-3.1.4-1.noarch.rpm \
