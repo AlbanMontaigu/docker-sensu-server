@@ -8,21 +8,13 @@ It runs redis, rabbitmq-server, uchiwa, sensu-api, sensu-server and ssh processe
 Install from docker index or build from Dockerfile
 
 ```
-docker pull hiroakis/docker-sensu-server
-```
-
-or
-
-```
-git clone https://github.com/hiroakis/docker-sensu-server.git
-cd docker-sensu-server
-docker build -t yourname/docker-sensu-server .
+docker pull amontaigu/sensu-server
 ```
 
 ## Run
 
 ```
-docker run -d -p 10022:22 -p 3000:3000 -p 4567:4567 -p 5671:5671 -p 15672:15672 hiroakis/docker-sensu-server
+docker run -d -p 3000:3000 -p 4567:4567 -p 5671:5671 -p 15672:15672 amontaigu/sensu-server
 ```
 
 ## How to access via browser and sensu-client
@@ -81,12 +73,12 @@ These are examples of sensu-client configuration.
 }
 ```
 
-## ssh login
+## Documentation and references
 
-```
-ssh hiroakis@localhost -p 10022
-password: hiroakis
-```
+* [Sensu – Adding Check’s and Handler’s](https://beingasysadmin.wordpress.com/2013/04/26/378/)
+* [GitHub sensu-plugins-mailer](https://github.com/sensu-plugins/sensu-plugins-mailer)
+* [Adding a Sensu handler](https://sensuapp.org/docs/0.16/adding_a_handler)
+* [Comparing Seven Monitoring Options for Docker](http://rancher.com/comparing-monitoring-options-for-docker-deployments/)
 
 ## License
 
