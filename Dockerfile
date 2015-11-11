@@ -6,7 +6,7 @@ MAINTAINER Alban Montaigu <alban.montaigu@gmail.com>
 
 # Basic packages
 RUN rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm \
-  && yum -y install passwd sudo git wget
+  && yum -y install passwd sudo git wget ruby gcc gcc-c++
 
 # Create user
 RUN useradd hiroakis \
@@ -35,9 +35,14 @@ RUN rabbitmq-plugins enable rabbitmq_management
 ADD ./files/sensu.repo /etc/yum.repos.d/
 RUN yum install -y sensu
 ADD ./files/config.json /etc/sensu/
+ADD ./files/handler_mailer.json /etc/sensu/conf.d/handler_mailer.json
 RUN mkdir -p /etc/sensu/ssl \
   && cp /joemiller.me-intro-to-sensu/client_cert.pem /etc/sensu/ssl/cert.pem \
-  && cp /joemiller.me-intro-to-sensu/client_key.pem /etc/sensu/ssl/key.pem
+  && cp /joemiller.me-intro-to-sensu/client_key.pem /etc/sensu/ssl/key.pem \
+  && /opt/sensu/embedded/bin/gem install sensu-plugin \
+  && /opt/sensu/embedded/bin/gem install sensu-plugins-mailer \
+  && wget -O /etc/sensu/handlers/mailer.rb https://raw.github.com/sensu/sensu-community-plugins/master/handlers/notification/mailer.rb \
+  && wget -O /etc/sensu/conf.d/mailer.json https://raw.github.com/sensu/sensu-community-plugins/master/handlers/notification/mailer.json
 
 # uchiwa
 RUN yum install -y uchiwa
@@ -51,4 +56,3 @@ ADD files/supervisord.conf /etc/supervisord.conf
 EXPOSE 3000 4567 5671 15672
 
 CMD ["/usr/bin/supervisord"]
-
