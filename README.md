@@ -5,7 +5,7 @@ It runs redis, rabbitmq-server, uchiwa, sensu-api, sensu-server and ssh processe
 
 ## Installation
 
-Install from docker index or build from Dockerfile
+Install from docker index
 
 ```
 docker pull amontaigu/sensu-server
