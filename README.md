@@ -1,7 +1,10 @@
 # docker-sensu-server
 
-CentOS and sensu.
+Debian jessie and sensu stuff.
+
 It runs redis, rabbitmq-server, uchiwa, sensu-api, sensu-server and ssh processes.
+
+Thanks to [Original project hiroakis/docker-sensu-server](https://github.com/hiroakis/docker-sensu-server).
 
 ## Installation
 
@@ -75,6 +78,7 @@ These are examples of sensu-client configuration.
 
 ## Documentation and references
 
+* [Original project hiroakis/docker-sensu-server](https://github.com/hiroakis/docker-sensu-server)
 * [Sensu – Adding Check’s and Handler’s](https://beingasysadmin.wordpress.com/2013/04/26/378/)
 * [GitHub sensu-plugins-mailer](https://github.com/sensu-plugins/sensu-plugins-mailer)
 * [Adding a Sensu handler](https://sensuapp.org/docs/0.16/adding_a_handler)

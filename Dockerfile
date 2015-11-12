@@ -1,3 +1,11 @@
+# ================================================================================================================
+#
+# Docker sensu server image
+# 
+# @see https://github.com/hiroakis/docker-sensu-server
+# @see https://sensuapp.org/docs/latest/install-sensu
+# ================================================================================================================
+
 # Base image
 FROM debian:jessie
 
