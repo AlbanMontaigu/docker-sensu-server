@@ -31,7 +31,7 @@ RUN apt-get install -y rabbitmq-server \
     && cp /joemiller.me-intro-to-sensu/server_cert.pem /etc/rabbitmq/ssl/cert.pem \
     && cp /joemiller.me-intro-to-sensu/server_key.pem /etc/rabbitmq/ssl/key.pem \
     && cp /joemiller.me-intro-to-sensu/testca/cacert.pem /etc/rabbitmq/ssl/
-ADD ./files/rabbitmq.config /etc/rabbitmq/
+ADD ./sensu/rabbitmq.config /etc/rabbitmq/
 RUN rabbitmq-plugins enable rabbitmq_management
 
 # Sensu server
@@ -39,8 +39,8 @@ RUN wget -q http://repositories.sensuapp.org/apt/pubkey.gpg -O- | sudo apt-key a
     && echo "deb     http://repositories.sensuapp.org/apt sensu main" | sudo tee /etc/apt/sources.list.d/sensu.list \
     && apt-get update \
     && apt-get install -y sensu
-ADD ./files/config.json /etc/sensu/
-ADD ./files/handler_mailer.json /etc/sensu/conf.d/handler_mailer.json
+ADD ./sensu/config.json /etc/sensu/
+ADD ./sensu/handler_mailer.json /etc/sensu/conf.d/handler_mailer.json
 RUN mkdir -p /etc/sensu/ssl \
     && cp /joemiller.me-intro-to-sensu/client_cert.pem /etc/sensu/ssl/cert.pem \
     && cp /joemiller.me-intro-to-sensu/client_key.pem /etc/sensu/ssl/key.pem \
@@ -52,10 +52,10 @@ RUN mkdir -p /etc/sensu/ssl \
 # uchiwa
 RUN apt-get install -y uchiwa \
     && rm -r /var/lib/apt/lists/*
-ADD ./files/uchiwa.json /etc/sensu/
+ADD ./sensu/uchiwa.json /etc/sensu/
 
 # supervisord
-ADD ./files/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+ADD ./supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 3000 4567 5671 15672
 
