@@ -18,7 +18,7 @@ ENV DEBIAN_FRONTEND="noninteractive"
 # System preparation
 RUN apt-get update \
     && apt-get upgrade -y \
-    && apt-get install -y sudo git wget ruby gcc openssl supervisor build-essential redis-server \
+    && apt-get install -y sudo git wget ruby ruby-dev openssl supervisor build-essential redis-server \
     && mkdir -p /var/log/supervisor
 
 # RabbitMQ
@@ -44,8 +44,8 @@ ADD ./sensu/handler_mailer.json /etc/sensu/conf.d/handler_mailer.json
 RUN mkdir -p /etc/sensu/ssl \
     && cp /joemiller.me-intro-to-sensu/client_cert.pem /etc/sensu/ssl/cert.pem \
     && cp /joemiller.me-intro-to-sensu/client_key.pem /etc/sensu/ssl/key.pem \
-    && /opt/sensu/embedded/bin/gem install sensu-plugin \
-    && /opt/sensu/embedded/bin/gem install sensu-plugins-mailer \
+    && gem install sensu-plugin \
+    && gem install sensu-plugins-mailer \
     && wget -O /etc/sensu/handlers/mailer.rb https://raw.github.com/sensu/sensu-community-plugins/master/handlers/notification/mailer.rb \
     && wget -O /etc/sensu/conf.d/mailer.json https://raw.github.com/sensu/sensu-community-plugins/master/handlers/notification/mailer.json
 
