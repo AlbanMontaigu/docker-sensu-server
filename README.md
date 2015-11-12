@@ -2,7 +2,7 @@
 
 Debian jessie and sensu stuff.
 
-It runs redis, rabbitmq-server, uchiwa, sensu-api, sensu-server and ssh processes.
+It runs redis, rabbitmq-server, uchiwa, sensu-api, sensu-server processes.
 
 Thanks to [Original project hiroakis/docker-sensu-server](https://github.com/hiroakis/docker-sensu-server).
 
