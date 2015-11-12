@@ -47,6 +47,7 @@ RUN mkdir -p /etc/sensu/ssl \
     && gem install sensu-plugin \
     && gem install sensu-plugins-mailer \
     && wget -O /etc/sensu/handlers/mailer.rb https://raw.github.com/sensu/sensu-community-plugins/master/handlers/notification/mailer.rb \
+    && chmod +x https://github.com/AlbanMontaigu/docker-sensu-server.git \
     && wget -O /etc/sensu/conf.d/mailer.json https://raw.github.com/sensu/sensu-community-plugins/master/handlers/notification/mailer.json
 
 # uchiwa
