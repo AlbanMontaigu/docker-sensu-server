@@ -40,15 +40,11 @@ RUN wget -q http://repositories.sensuapp.org/apt/pubkey.gpg -O- | sudo apt-key a
     && apt-get update \
     && apt-get install -y sensu
 ADD ./sensu/config.json /etc/sensu/
-ADD ./sensu/handler_mailer.json /etc/sensu/conf.d/handler_mailer.json
 RUN mkdir -p /etc/sensu/ssl \
     && cp /joemiller.me-intro-to-sensu/client_cert.pem /etc/sensu/ssl/cert.pem \
     && cp /joemiller.me-intro-to-sensu/client_key.pem /etc/sensu/ssl/key.pem \
     && gem install sensu-plugin \
-    && gem install sensu-plugins-mailer \
-    && wget -O /etc/sensu/handlers/mailer.rb https://raw.github.com/sensu/sensu-community-plugins/master/handlers/notification/mailer.rb \
-    && chmod +x /etc/sensu/handlers/mailer.rb \
-    && wget -O /etc/sensu/conf.d/mailer.json https://raw.github.com/sensu/sensu-community-plugins/master/handlers/notification/mailer.json
+    && gem install sensu-plugins-mailer
 
 # uchiwa
 RUN apt-get install -y uchiwa \
